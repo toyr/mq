@@ -9,17 +9,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import javax.xml.ws.WebEndpoint;
-
 /**
  * @author unisk1123
  * @Description
  * @create 2019/4/25
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "demo.msa.rabbitmq")
 public class HelloServerApplication {
 
-    @Bean
+    /*@Bean
     public Queue helloQueue() {
         return new Queue("hello-queue");
     }
@@ -47,7 +45,7 @@ public class HelloServerApplication {
     @Bean
     public Jackson2JsonMessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
-    }
+    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(HelloServerApplication.class, args);

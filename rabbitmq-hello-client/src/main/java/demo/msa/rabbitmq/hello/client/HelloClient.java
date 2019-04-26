@@ -1,5 +1,7 @@
 package demo.msa.rabbitmq.hello.client;
 
+import com.rabbitmq.client.RpcClient;
+import demo.msa.rabbitmq.rpc.client.RpcSender;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class HelloClient {
 
-    @Autowired
+    /*@Autowired
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
@@ -29,5 +31,12 @@ public class HelloClient {
 
     public void sendFoo(Foo foo) {
         rabbitTemplate.convertAndSend("foo-queue", foo);
+    }*/
+
+    @Autowired
+    private RpcSender<String, String> rpcSender;
+
+    public String send(String message) {
+        return rpcSender.send(message);
     }
 }

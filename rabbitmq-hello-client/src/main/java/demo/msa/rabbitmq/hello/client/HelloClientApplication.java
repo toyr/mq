@@ -24,10 +24,10 @@ import java.util.concurrent.Executors;
  * @create 2019/4/25
  */
 @RestController
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "demo.msa.rabbitmq")
 public class HelloClientApplication {
 
-    @Autowired
+    /*@Autowired
     private HelloClient helloClient;
 
     @Bean
@@ -65,7 +65,7 @@ public class HelloClientApplication {
 //            helloClient.send("hello workd");
 //        }
 
-        /*int threads = 10;
+        *//*int threads = 10;
         ExecutorService pool = Executors.newFixedThreadPool(threads);
         try {
             final CountDownLatch begin = new CountDownLatch(1);
@@ -93,10 +93,19 @@ public class HelloClientApplication {
             e.printStackTrace();
         } finally {
             pool.shutdown();
-        }*/
+        }*//*
 
         stopWatch.stop();
         System.out.println("time: " + stopWatch.getTotalTimeSeconds());
+    }*/
+
+    @Autowired
+    private HelloClient helloClient;
+
+    @PostConstruct
+    public void init() {
+        String result = helloClient.send("world");
+        System.out.println(result);
     }
 
     @GetMapping("/send/{message}")

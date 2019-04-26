@@ -1,5 +1,6 @@
 package demo.msa.rabbitmq.hello.server;
 
+import demo.msa.rabbitmq.rpc.server.RpcReceiver;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +10,9 @@ import org.springframework.stereotype.Component;
  * @create 2019/4/25
  */
 @Component
-public class HelloServer {
+public class HelloServer implements RpcReceiver<String, String> {
 
-    @RabbitListener(queues = "hello-queue")
+    /*@RabbitListener(queues = "hello-queue")
     public void receive(String message) {
         System.out.println(message);
     }
@@ -24,5 +25,11 @@ public class HelloServer {
     @RabbitListener(queues = "rpc-queue")
     public String receiveRpc(String message) {
         return "hello" + message;
+    }*/
+
+    @Override
+    @RabbitListener(queues = "rpc-queue")
+    public String receive(String message) {
+        return "hello " + message;
     }
 }
