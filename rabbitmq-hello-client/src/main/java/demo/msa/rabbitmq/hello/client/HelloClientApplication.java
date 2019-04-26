@@ -1,5 +1,6 @@
 package demo.msa.rabbitmq.hello.client;
 
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
+import javax.xml.ws.WebEndpoint;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -39,24 +41,31 @@ public class HelloClientApplication {
     }
 
     @Bean
+    public DirectExchange exchange() {
+        return new DirectExchange("rpc-exchange");
+    }
+
+    @Bean
     public Jackson2JsonMessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 
     @PostConstruct
     public void init() {
-//        helloClient.send("hello world");
 //        Foo foo = new Foo();
 //        foo.setAge(10);
 //        foo.setName("foo");
 //        helloClient.sendFoo(foo);
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
+        String world = helloClient.sendRpc("world");
+        System.out.println(world);
+//        helloClient.send("hello world");
 //        for (int i = 0; i < 1000; i++) {
 //            helloClient.send("hello workd");
 //        }
 
-        int threads = 10;
+        /*int threads = 10;
         ExecutorService pool = Executors.newFixedThreadPool(threads);
         try {
             final CountDownLatch begin = new CountDownLatch(1);
@@ -84,7 +93,7 @@ public class HelloClientApplication {
             e.printStackTrace();
         } finally {
             pool.shutdown();
-        }
+        }*/
 
         stopWatch.stop();
         System.out.println("time: " + stopWatch.getTotalTimeSeconds());

@@ -20,4 +20,9 @@ public class HelloServer {
     public void receive(Foo o) {
         System.out.println(o);
     }
+
+    @RabbitListener(queues = "rpc-queue")
+    public String receiveRpc(String message) {
+        return "hello" + message;
+    }
 }
