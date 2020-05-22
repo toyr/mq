@@ -16,6 +16,8 @@
         <module>rabbitmq-hello-client</module>
         <module>rabbitmq-rpc-server</module>
         <module>rabbitmq-rpc-client</module>
+        <module>kafka-hello-client</module>
+        <module>kafka-hello-server</module>
     </modules>
 
     <parent>
