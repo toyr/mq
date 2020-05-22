@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>demo.msa</groupId>
-    <artifactId>mq</artifactId>
+    <artifactId>msa-mq</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
