@@ -18,6 +18,9 @@
         <module>rabbitmq-rpc-client</module>
         <module>kafka-hello-client</module>
         <module>kafka-hello-server</module>
+        <module>event</module>
+        <module>bar</module>
+        <module>foo</module>
     </modules>
 
     <parent>
