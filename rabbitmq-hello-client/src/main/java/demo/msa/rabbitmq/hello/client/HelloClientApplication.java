@@ -110,7 +110,8 @@ public class HelloClientApplication {
 
     @GetMapping("/send/{message}")
     public String send(@PathVariable("message") String message) {
-        helloClient.send(message);
+        String send = helloClient.send(message);
+        System.out.println(send);
         return message;
     }
 
