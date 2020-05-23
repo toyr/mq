@@ -32,7 +32,8 @@ public class BarService {
           "INSERT INTO bar (id, name) VALUES (?, ?)",
           barId, "bar"
       );
-      throw new RuntimeException(); // 故意抛出异常
+      // 故意抛出异常
+      throw new RuntimeException();
     } catch (Exception e) {
       eventManager.sendEventQueue("bar-failure-queue", event);
       throw new AmqpRejectAndDontRequeueException(e);

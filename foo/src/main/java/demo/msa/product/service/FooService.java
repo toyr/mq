@@ -32,8 +32,11 @@ public class FooService {
           fooId, name
       );
     } finally {
+      // 创建一个Event对象
       Event event = new Event(EventType.CREATE, "Foo", fooId);
+      // 将一个Event对象插入事件表中
       eventManager.insertEvent(event);
+      // 将Event对象写入成功队列中
       eventManager.sendEventQueue("foo-success-queue", event);
     }
   }
